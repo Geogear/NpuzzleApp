@@ -310,17 +310,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void start(android.view.View v){
-        gl.removeAllViewsInLayout();
-        moves = 0;
-        tmov.setText(String.valueOf(moves));
-        space = row*column-1;
-        last_move = 'o';
-        for(int i = 0; i < bord.length; i++){
-            if(i != space)
-                bord[i] = i+1;
-            else
-                bord[i] = -1;
+        int i = 0;
+        char current_move = 'e';
+        while( i < row*column){
+            while(true){
+                int j = rand.nextInt(4);
+                if(j == 0)
+                    current_move = 'u';
+                else if(j == 1)
+                    current_move = 'd';
+                else if( j== 2)
+                    current_move = 'r';
+                else if(j == 3)
+                    current_move = 'l';
+
+                if(current_move != last_move)
+                    break;
+            }
+            if(move(current_move))
+                ++i;
         }
-        setGrid();
     }
 }
